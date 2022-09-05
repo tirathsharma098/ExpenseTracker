@@ -22,7 +22,7 @@ const expenses = [
   },
 ];
 function App() {
-  return (<Expenses expenses={expenses}/>);
+  return (<Expenses expenses={expenses} />);
 }
 
 export default App;

@@ -6,7 +6,7 @@ const ExpenseForm = (props) => {
     const [enteredTitle, setTitle] = useState('');
     const [enteredAmount, setAmount] = useState('');
     const [enteredDate, setDate] = useState('');
-
+    const [showForm, setShowForm] = useState(false);
     const titleHandler = (e) => {
         setTitle(e.target.value);
     }
@@ -18,6 +18,12 @@ const ExpenseForm = (props) => {
     }
     const submitHandler = (e) => {
         e.preventDefault();
+        console.log('SHOW >> ', showForm);
+        if(!showForm){
+            setShowForm(true);
+            return;
+        }
+        console.log('After If executed');
         const expenseData = {
             title: enteredTitle,
             amount: enteredAmount,
@@ -27,9 +33,14 @@ const ExpenseForm = (props) => {
         setTitle('');
         setDate('');
         expenseSubmit(expenseData);
+        setShowForm(false)
+    }
+    const cancelInputHandler = e => {
+        setShowForm(prevValue => {return !prevValue});
     }
     return (
         <form onSubmit={submitHandler}>
+            {showForm ? 
             <div className="new-expense__control">
                 <div className="new-expense__control">
                     <label>Title</label>
@@ -44,8 +55,10 @@ const ExpenseForm = (props) => {
                     <input type="date" value={enteredDate} min="2019-01-01" max="2023-12-31" onChange={dateHandler}/>
                 </div>
             </div>
+            : ""}
             <div className="new-expenses__actions">
-                <button>Submit</button>
+                <button type="button" onClick={cancelInputHandler}>Cancel</button>
+                <button type="submit">Submit</button>
             </div>
         </form>
     );

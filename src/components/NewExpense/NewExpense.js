@@ -4,7 +4,7 @@ import ExpenseForm from "./ExpenseForm";
 const NewExpense = (props) => {
     return (
         <div className="new-expense">
-            <ExpenseForm onNewExpenseSubmit={props.onNewExpenseSubmit}/>
+            <ExpenseForm onNewExpenseSubmit={props.onAddExpense}/>
         </div>
     );
 }
